@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E46FF"/><stop offset="1" stop-color="#6AA0FF"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="#0A1630"/>
+  <circle cx="220" cy="160" r="220" fill="url(#g)" opacity=".28"/>
+  <circle cx="980" cy="80" r="220" fill="url(#g)" opacity=".18"/>
+  <text x="80" y="360" font-family="Inter,Segoe UI,Arial" font-size="64" fill="#E8F0FF" font-weight="800">TrancheReady</text>
+  <text x="80" y="430" font-family="Inter,Segoe UI,Arial" font-size="36" fill="#A8B9E3">CSV in → Signed ZIP out</text>
+</svg>
