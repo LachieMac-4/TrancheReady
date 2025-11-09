@@ -1,0 +1,2 @@
+TxnID,ClientID,Date,Amount,Currency,Type,Channel,CounterpartyCountry
+T1001,C001,2025-01-05,9800,AUD,cash_deposit,branch,AU
