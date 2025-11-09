@@ -1,0 +1,2 @@
+ClientID,FullName,DateOfBirth,Country,Residency,PEP,Sanctions,LastKYCDate,ServiceType
+C001,Jane Smith,1985-04-12,AU,Resident,false,false,2024-01-15,Legal
