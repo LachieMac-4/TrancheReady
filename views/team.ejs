@@ -1,67 +1,44 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Team — TrancheReady</title>
-  <link rel="stylesheet" href="/public/style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team • TrancheReady</title>
+<style>
+  :root{--ink:#E6EDFF;--muted:#95A7D0;--bg:#0A1630;--panel:#0B1733;--line:#213058;--radius:14px}
+  body{margin:0;background:#0A1630;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui}
+  .wrap{max-width:800px;margin:28px auto;padding:0 16px}
+  .card{background:#0B1733;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 44px rgba(0,12,45,.35);padding:18px;margin-bottom:16px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:12px 16px;border:1px solid var(--line);background:linear-gradient(90deg,#2455FF,#7AA3FF);color:white;cursor:pointer;font-weight:600}
+  input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0B1738;color:var(--ink)}
+  .muted{color:var(--muted)}
+  pre{white-space:pre-wrap;background:#0C1733;border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto}
+</style>
 </head>
 <body>
-<header class="glass-nav">
-  <div class="container nav-grid">
-    <a class="brand" href="/" aria-label="TrancheReady">
-      <img src="/public/logo.svg" class="brand-mark" alt="" width="28" height="32">
-      <span class="brand-name">TrancheReady</span>
-    </a>
-  </div>
-</header>
-
-<main class="container page">
-  <section class="card">
-    <h1>Team</h1>
-    <p class="muted small">Team ID: <span class="mono"><%= team_id %></span> · Build: <span class="mono"><%= build_id %></span></p>
-    <div style="display:flex; gap:10px; margin-top:8px">
-      <button id="createInvite" class="btn primary">Create invite link</button>
-      <a class="btn ghost" href="/app">Back to app</a>
+<div class="wrap">
+  <div class="card">
+    <h1>Team invites</h1>
+    <p class="muted">Team ID: <code><%= team_id %></code> • Build <%= build_id %></p>
+    <div class="row">
+      <button class="btn" id="invite">Create Invite Link</button>
+      <input id="out" placeholder="Invite link will appear here…" readonly />
     </div>
-    <div id="msg" class="muted small" style="margin-top:10px"></div>
-    <ul id="invList" class="file-list" style="margin-top:12px"></ul>
-  </section>
-</main>
-
+  </div>
+  <div class="card">
+    <h2>How it works</h2>
+    <pre>1) Click "Create Invite Link"
+2) Send the link to a teammate
+3) They open it → read-only seat cookie is set
+4) They can access /app without paying (your team seat)</pre>
+  </div>
+</div>
 <script>
-(function(){
-  const btn = document.getElementById('createInvite');
-  const msg = document.getElementById('msg');
-  const list = document.getElementById('invList');
-
-  function addInvite(url){
-    const li = document.createElement('li');
-    li.innerHTML = '<div style="display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap">'+
-      '<code class="mono">'+url+'</code>'+
-      '<div style="display:flex;gap:8px">'+
-        '<a class="btn small secondary" target="_blank" rel="noopener" href="'+url+'">Open</a>'+
-        '<button class="btn small ghost">Copy</button>'+
-      '</div></div>';
-    const copyBtn = li.querySelector('button');
-    copyBtn.addEventListener('click', async ()=> {
-      try{ await navigator.clipboard.writeText(url); copyBtn.textContent='Copied'; setTimeout(()=>copyBtn.textContent='Copy',1200); }catch{}
-    });
-    list.prepend(li);
-  }
-
-  btn?.addEventListener('click', async ()=>{
-    msg.textContent = 'Creating invite…';
-    try{
-      const r = await fetch('/team/invite', { method:'POST' });
-      const data = await r.json();
-      if(!r.ok) throw new Error(data.error || 'failed');
-      addInvite(data.invite_url);
-      msg.textContent = 'Invite created.';
-    }catch(e){
-      msg.textContent = 'Error: ' + (e.message || 'failed');
-    }
-  });
-})();
+document.getElementById('invite').onclick = async ()=>{
+  const r = await fetch('/team/invite',{ method:'POST' });
+  const j = await r.json();
+  document.getElementById('out').value = j.invite_url || 'Failed to create link';
+};
 </script>
 </body>
 </html>
