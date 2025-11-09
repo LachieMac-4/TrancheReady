@@ -1,4 +1,4 @@
-// server.js — hardened build for Render
+// server.js — hardened, paywall, CSV→ZIP, Render-ready
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -17,7 +17,7 @@ import { normalizeClients, normalizeTransactions } from './lib/csv-normalize.js'
 import { scoreAll } from './lib/rules.js';
 import { buildCases } from './lib/cases.js';
 import { buildManifest } from './lib/manifest.js';
-import { zipNamedBuffers } from './lib/zip.js';  // now guaranteed to exist
+import { zipNamedBuffers } from './lib/zip.js';
 import { validateClients, validateTransactions } from './lib/validate.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -32,8 +32,6 @@ const STRIPE_PRICE_ID_TEAM = process.env.STRIPE_PRICE_ID_TEAM || '';
 const PRIMARY_DOMAIN = (process.env.PRIMARY_DOMAIN || '').toLowerCase().trim();
 const FORCE_HTTPS = (process.env.FORCE_HTTPS || '1') === '1';
 const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
-
-// Build ID
 const BUILD_ID = process.env.BUILD_ID || crypto.randomBytes(6).toString('hex');
 
 // ---------- Helpers ----------
@@ -88,6 +86,7 @@ app.use((req,res,next)=>{
   next();
 });
 
+// Security headers
 app.use(helmet({
   contentSecurityPolicy:{
     useDefaults:true,
@@ -117,18 +116,30 @@ const verifyLimiter = rateLimit({ windowMs: 60*1000, max:40 });
 const dlLimiter = rateLimit({ windowMs: 60*1000, max:20 });
 app.use(baseLimiter);
 
-const upload = multer({ storage: multer.memoryStorage(), limits:{ fileSize:25*1024*1024, files:2 } });
+// Multer memory uploads (CSV only)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 25 * 1024 * 1024, files: 2 },
+  fileFilter: (_req, file, cb) => {
+    const ok =
+      file.mimetype === 'text/csv' ||
+      file.mimetype === 'application/vnd.ms-excel' ||
+      /\.csv$/i.test(file.originalname);
+    cb(ok ? null : new Error('Only CSV files are allowed'), ok);
+  }
+});
 
+// Health/version
 app.get('/healthz', (_req,res)=>res.send('ok'));
 app.get('/api/version', (_req,res)=>res.json({ build: BUILD_ID, ttl_min: VERIFY_TTL_MIN }));
 
-// Marketing
+// Marketing routes → static site
 app.get('/', (req,res)=>{ const acc = getAccess(req); if (acc) return res.redirect(302,'/app'); return res.redirect(302,'/site/index.html'); });
 app.get('/features', (_req,res)=>res.redirect(302,'/site/features.html'));
 app.get('/faq', (_req,res)=>res.redirect(302,'/site/faq.html'));
 app.get('/pricing', (_req,res)=>res.redirect(302,'/site/pricing.html'));
 
-// Stripe
+// Stripe checkout
 app.post('/api/create-checkout-session', async (req,res)=>{
   try{
     if (!stripe) return res.status(400).json({ error:'Payments not configured.' });
@@ -159,7 +170,7 @@ app.get('/billing/return', async (req,res)=>{
   }catch(e){ console.error(e); return res.redirect(302,'/pricing?error=verify_failed'); }
 });
 
-// Team seats
+// Team seats (invite link)
 app.get('/team', requirePaid, (req,res)=>{ const owner = req.access.role==='owner'?req.access.owner:null; const team_id = teamIdForOwner(owner); res.render('team',{ team_id, build_id: BUILD_ID }); });
 app.post('/team/invite', requirePaid, (req,res)=>{ if (req.access.role!=='owner') return res.status(403).json({ error:'Only owner can invite.' }); const team_id = teamIdForOwner(req.access.owner); const payload = JSON.stringify({ sub:'invite', team_id, exp: Date.now()+7*24*3600*1000 }); const token = sign(payload); const base = originOf(req); res.json({ invite_url:`${base}/join/${encodeURIComponent(token)}`, team_id }); });
 app.get('/join/:token', (req,res)=>{ const val = verifySigned(req.params.token || ''); if (!val) return res.status(400).render('error',{ title:'Invalid invite', message:'This invite link is invalid.' }); let obj; try{ obj = JSON.parse(val); }catch{ obj=null; } if (!obj || obj.sub!=='invite' || Date.now()>(obj.exp||0)) return res.status(400).render('error',{ title:'Expired invite', message:'This invite link has expired.' }); const seat = JSON.stringify({ sub:'seat', team_id: obj.team_id, role:'member', exp: Date.now()+30*24*3600*1000 }); res.cookie('tr_seat', sign(seat), { httpOnly:true, sameSite:'lax', secure:true, maxAge:30*24*3600*1000 }); return res.redirect(302,'/app'); });
@@ -203,7 +214,8 @@ app.post('/api/validate', requirePaid, heavyLimiter,
         issues:{ clients:clientIssues, transactions:txIssues, rejects },
         lookback
       });
-    }catch{
+    }catch(e){
+      console.error(e);
       res.status(500).json({ ok:false, error:'Validation failed' });
     }
   }
@@ -256,7 +268,8 @@ app.post('/upload', requirePaid, heavyLimiter,
 
       const base = originOf(req);
       res.json({ ok:true, risk:scores, verify_url:`${base}/verify/${token}`, download_url:`${base}/download/${token}` });
-    }catch{
+    }catch(e){
+      console.error(e);
       res.status(500).json({ error:'Processing failed.' });
     }
   }
