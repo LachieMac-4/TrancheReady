@@ -1,17 +1,22 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html>
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><%= title || 'Error' %> — TrancheReady</title>
-  <link rel="stylesheet" href="/public/style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %></title>
+<style>
+  :root{--ink:#E6EDFF;--muted:#95A7D0;--bg:#0A1630;--panel:#0B1733;--line:#213058;--radius:14px}
+  body{margin:0;background:#0A1630;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui}
+  .wrap{max-width:720px;margin:20vh auto 0;padding:0 16px;text-align:center}
+  .card{background:#0B1733;border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:inline-block;box-shadow:0 18px 44px rgba(0,12,45,.35)}
+  .muted{color:var(--muted)}
+  a{color:#7AA3FF}
+</style>
 </head>
 <body>
-<main class="container page">
-  <section class="card">
-    <h1><%= title || 'Something went wrong' %></h1>
-    <p class="muted"><%= message || 'Please go back and try again.' %></p>
-    <div style="margin-top:12px"><a class="btn primary" href="/">Back to site</a></div>
-  </section>
-</main>
+  <div class="wrap"><div class="card">
+    <h1><%= title %></h1>
+    <p class="muted"><%= message %></p>
+    <p><a href="/">Back to home</a></p>
+  </div></div>
 </body>
 </html>
