@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: trancheready
+    env: node
+    plan: starter
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    nodeVersion: "18"
+    autoDeploy: true
