@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=18 <=22" },
+  "engines": {
+    "node": ">=18 <=22"
+  },
   "scripts": {
     "start": "node server.js"
   },
@@ -13,6 +15,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "csv-parse": "^5.5.6",
+    "date-fns": "^3.6.0",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.0",
