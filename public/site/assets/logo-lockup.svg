@@ -1,0 +1,22 @@
+<svg width="560" height="120" viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TrancheReady">
+  <defs>
+    <linearGradient id="gl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2455FF"/>
+      <stop offset="1" stop-color="#7AA3FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon (same motif) -->
+  <g transform="translate(0,12)">
+    <rect x="0" y="0" width="96" height="96" rx="18" fill="#0B1733" stroke="#213058" stroke-width="2"/>
+    <path d="M8 56 C28 48 44 68 64 58 C84 50 94 64 96 58 L96 80 L8 80 Z" fill="url(#gl)" opacity=".40"/>
+    <path d="M8 40 C26 34 46 54 66 44 C84 36 96 46 96 42 L96 56 L8 56 Z" fill="url(#gl)" opacity=".60"/>
+    <path d="M26 48 l14 14 36 -36" fill="none" stroke="url(#gl)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- Wordmark -->
+  <g transform="translate(116,26)">
+    <!-- Use system sans: Inter-like shapes drawn as paths for consistency -->
+    <text x="0" y="34" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="36" font-weight="700" fill="#E8EFFF">Tranche</text>
+    <text x="180" y="34" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="36" font-weight="700" fill="url(#gl)">Ready</text>
+    <text x="0" y="64" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="14" fill="#9FB1D8">CSV in → signed ZIP out</text>
+  </g>
+</svg>
