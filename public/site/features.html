@@ -1,33 +1,62 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Features — TrancheReady</title>
-  <link rel="icon" href="/public/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/public/site/site.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrancheReady — Features</title>
+  <link rel="stylesheet" href="/site/assets/style.css" />
 </head>
 <body>
-<header class="glass-nav">
-  <div class="container nav-grid">
-    <a class="brand" href="/"><img src="/public/logo.svg" class="brand-mark" alt="" width="28" height="32"><span class="brand-name">TrancheReady</span></a>
-    <nav class="nav-links">
-      <a class="link-muted" href="/features">Features</a>
-      <a class="link-muted" href="/faq">FAQ</a>
-      <a class="btn secondary" href="/pricing">Pricing</a>
+  <header class="nav glass">
+    <a class="brand" href="/"><span class="logo-dot"></span>TrancheReady</a>
+    <nav>
+      <a href="/">Home</a>
+      <a class="active" href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/faq">FAQ</a>
+      <button id="themeToggle" class="pill">Toggle</button>
     </nav>
-  </div>
-</header>
-<main class="container page">
-  <section class="card">
-    <h1>Features</h1>
-    <div class="list">
-      <div class="panel"><h3>Explainable risk</h3><p>High/Med/Low with reasons. Banding: High ≥30, Medium ≥15.</p></div>
-      <div class="panel"><h3>Monitoring cases</h3><p>Structuring, high-risk corridors, large domestic transfers.</p></div>
-      <div class="panel"><h3>Evidence pack</h3><p>JSONs + printable program.html + manifest.json (SHA-256).</p></div>
-      <div class="panel"><h3>Verify link</h3><p>Read-only view for auditors; confirm hashes match.</p></div>
+  </header>
+
+  <main class="container">
+    <section class="hero hero--short">
+      <h1>Purpose-built for Tranche-2</h1>
+      <p class="lead">Evidence you can defend, explanations you can share, and zero integration risk.</p>
+    </section>
+
+    <section class="pricing-grid" style="grid-template-columns: repeat(2, 1fr)">
+      <div class="card">
+        <h3>Rules-first risk engine</h3>
+        <p class="muted">Explainable scoring with tunable rules: PEP/sanctions, stale KYC, residency, delivery channel, services, and country exposure.</p>
+      </div>
+      <div class="card">
+        <h3>Behavioural signals (18-month lookback)</h3>
+        <p class="muted">Structuring (≥4 cash deposits 9,600–9,999 in 7 days), high-risk corridors (≥2 intl transfers incl ≥$20k), large domestic transfers (≥$100k).</p>
+      </div>
+      <div class="card">
+        <h3>Audit-ready evidence</h3>
+        <p class="muted">JSON outputs, printable HTML, and SHA-256 manifest in a single ZIP. Verify page confirms integrity — no “trust us”.</p>
+      </div>
+      <div class="card">
+        <h3>Secure by default</h3>
+        <p class="muted">HTTPS, HSTS, CSP, rate-limits, memory uploads (no temp files), and no credentials collected.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">TrancheReady</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+        <a href="/site/privacy.html">Privacy</a>
+        <a href="/site/terms.html">Terms</a>
+      </nav>
     </div>
-  </section>
-</main>
-<script src="/site/site.js" defer></script>
+  </footer>
+
+  <script src="/site/assets/site.js" defer></script>
 </body>
 </html>
