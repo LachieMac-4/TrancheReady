@@ -1,82 +1,119 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TrancheReady — AML/CTF Tranche-2 Evidence</title>
-<link rel="icon" href="/public/favicon.ico">
-<style>
-  :root{
-    --ink:#E6EDFF; --muted:#95A7D0; --bg:#0A1630; --panel:#0B1733; --line:#213058;
-    --brand1:#2455FF; --brand2:#7AA3FF; --radius:14px
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(80% 120% at 20% 0%,#0E1F54 0%,#0A1630 45%,#0A1630 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  .nav{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(10,22,48,.6);border-bottom:1px solid var(--line);z-index:2}
-  .navin{max-width:1120px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px}
-  .brand{font-weight:700}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
-  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:64px 0}
-  .card{background:linear-gradient(180deg,var(--panel),#0A1530);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 44px rgba(0,12,45,.35);padding:22px}
-  h1{font-size:44px;line-height:1.1;margin:0 0 10px}
-  p.lead{color:var(--muted);font-size:18px;margin:0 0 14px}
-  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:12px 16px;border:1px solid var(--line);background:linear-gradient(90deg,var(--brand1),var(--brand2));color:white;cursor:pointer;font-weight:600;text-decoration:none}
-  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-  .chip{background:#0B1733;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:600}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:40px 0}
-  .grid .card{min-height:140px}
-  .footer{border-top:1px solid var(--line);color:var(--muted);padding:24px 0;margin-top:36px;text-align:center}
-  @media (max-width:960px){ .hero{grid-template-columns:1fr} .grid{grid-template-columns:1fr 1fr} }
-  @media (max-width:640px){ .grid{grid-template-columns:1fr} }
-  svg.wave{width:100%;height:260px}
-  .muted{color:var(--muted)}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrancheReady — CSV in → Signed ZIP out</title>
+  <meta name="description" content="Explainable client risk, monitoring cases, and audit-ready evidence without integrations. CSV in → signed ZIP out." />
+  <link rel="stylesheet" href="/site/assets/style.css" />
+  <meta name="color-scheme" content="dark light" />
 </head>
 <body>
-  <div class="nav"><div class="navin">
-    <div class="brand">TrancheReady</div>
-    <div style="margin-left:auto;display:flex;gap:10px">
-      <a class="btn" href="/pricing">Pricing</a>
-      <a class="btn" href="/faq">FAQ</a>
-      <a class="btn" href="/pricing">Sign in</a>
-    </div>
-  </div></div>
+  <header class="nav glass">
+    <a class="brand" href="/"><span class="logo-dot"></span>TrancheReady</a>
+    <nav>
+      <a class="active" href="/">Home</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/faq">FAQ</a>
+      <button id="themeToggle" class="pill">Toggle</button>
+    </nav>
+  </header>
 
-  <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#10224E" fill-opacity="1" d="M0,96L80,90.7C160,85,320,75,480,101.3C640,128,800,192,960,186.7C1120,181,1280,107,1360,69.3L1440,32L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
-  </svg>
-
-  <div class="wrap">
-    <div class="hero">
-      <div>
-        <h1>AML/CTF Tranche-2 evidence for small–mid firms</h1>
-        <p class="lead">Upload two CSVs. Get explainable risk scores, monitoring cases, and a signed ZIP pack — no system credentials.</p>
-        <div class="chips">
-          <div class="chip">Legal</div><div class="chip">Accounting</div><div class="chip">Real Estate</div><div class="chip">Advisory</div>
-        </div>
-        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn" href="/pricing">Get started</a>
-          <a class="btn" href="/faq">How it works</a>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>CSV in → signed ZIP out</h1>
+        <p class="lead">Explainable risk scores, monitoring cases, and a verifiable evidence pack — without giving us any credentials.</p>
+        <div style="margin-top:18px">
+          <a class="btn btn-primary" href="/pricing">Get started</a>
+          <a class="btn" href="#how">How it works</a>
         </div>
       </div>
+      <div class="hero-art">
+        <!-- simple SVG wave/diagram -->
+        <svg viewBox="0 0 1200 260" width="100%" height="220" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#2455FF"/>
+              <stop offset="1" stop-color="#7AA3FF"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,160 C160,120 260,190 420,150 C600,100 720,220 900,140 C1040,80 1120,120 1200,100 L1200,260 L0,260 Z" fill="url(#g)" fill-opacity=".18"/>
+          <rect x="140" y="40" rx="12" ry="12" width="200" height="120" fill="#10152a" stroke="#2a3a6b" />
+          <text x="240" y="105" text-anchor="middle" fill="#b6c8ff" font-size="14">Clients.csv</text>
+          <rect x="420" y="40" rx="12" ry="12" width="220" height="120" fill="#10152a" stroke="#2a3a6b" />
+          <text x="530" y="105" text-anchor="middle" fill="#b6c8ff" font-size="14">Transactions.csv</text>
+          <rect x="760" y="40" rx="12" ry="12" width="280" height="120" fill="#0B1733" stroke="#2f4277"/>
+          <text x="900" y="95" text-anchor="middle" fill="#e8efff" font-size="14">ZIP: clients.json, transactions.json,<tspan x="900" dy="18">cases.json, program.html, manifest.json</tspan></text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="container" style="margin-top:18px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <span class="pill">Legal</span>
+        <span class="pill">Accounting</span>
+        <span class="pill">Real Estate</span>
+        <span class="pill">Advisory</span>
+      </div>
+    </section>
+
+    <section class="container" style="margin-top:24px">
+      <div class="pricing-grid" style="grid-template-columns: repeat(4, 1fr)">
+        <div class="card">
+          <h3>Explainable risk</h3>
+          <p class="muted">High / Medium / Low with line-item reasons. Rules are tuned for your sector.</p>
+        </div>
+        <div class="card">
+          <h3>Monitoring cases</h3>
+          <p class="muted">Structuring, high-risk corridors, and large domestic transfers flagged.</p>
+        </div>
+        <div class="card">
+          <h3>Evidence pack</h3>
+          <p class="muted">ZIP contains JSON, printable HTML, and a signed SHA-256 manifest.</p>
+        </div>
+        <div class="card">
+          <h3>Verify link</h3>
+          <p class="muted">Auditors can confirm file integrity and download — no logins required.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="container" style="margin:28px auto 40px">
       <div class="card">
-        <h3>Why it’s faster</h3>
-        <p class="muted">No integrations. CSV exports are universal — minutes, not days. Evidence auditors can verify without “trust us”.</p>
-        <ul class="muted">
-          <li>Explainable High/Med/Low with reasons</li>
-          <li>Structuring, corridors, large domestic</li>
-          <li>Signed manifest + verify link</li>
-        </ul>
+        <h3>How it works</h3>
+        <ol class="list">
+          <li>Export Clients &amp; Transactions from your system as CSV</li>
+          <li>Upload in the app — we normalize headers, validate, and score</li>
+          <li>Download your signed evidence pack, or share the verify link</li>
+        </ol>
+        <div style="margin-top:12px">
+          <a class="btn btn-primary" href="/pricing">See pricing</a>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="grid">
-      <div class="card"><h3>Explainable risk</h3><p class="muted">Rules-first signals with plain-English reasons.</p></div>
-      <div class="card"><h3>Monitoring</h3><p class="muted">Structuring, corridors, large domestic transfers.</p></div>
-      <div class="card"><h3>Evidence pack</h3><p class="muted">JSON + printable HTML + signed manifest.</p></div>
-      <div class="card"><h3>Verify link</h3><p class="muted">Auditors confirm hashes independently.</p></div>
-    </div>
+    <section class="container security-row" style="margin-top:6px">
+      <div class="card mini"><h4>No credentials</h4><p>CSV exports only. No API keys, no logins.</p></div>
+      <div class="card mini"><h4>Integrity checks</h4><p>SHA-256 manifest + verify page for auditors.</p></div>
+      <div class="card mini"><h4>Data ownership</h4><p>Files are processed in memory and not persisted.</p></div>
+    </section>
+  </main>
 
-    <div class="footer muted">© <script>document.write(new Date().getFullYear())</script> TrancheReady</div>
-  </div>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">TrancheReady</div>
+      <nav>
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+        <a href="/site/privacy.html">Privacy</a>
+        <a href="/site/terms.html">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/site/assets/site.js" defer></script>
 </body>
 </html>
