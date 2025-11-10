@@ -1,22 +1,40 @@
 <!doctype html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title><%= title %></title>
-<style>
-  :root{--ink:#E6EDFF;--muted:#95A7D0;--bg:#0A1630;--panel:#0B1733;--line:#213058;--radius:14px}
-  body{margin:0;background:#0A1630;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui}
-  .wrap{max-width:720px;margin:20vh auto 0;padding:0 16px;text-align:center}
-  .card{background:#0B1733;border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:inline-block;box-shadow:0 18px 44px rgba(0,12,45,.35)}
-  .muted{color:var(--muted)}
-  a{color:#7AA3FF}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title || 'Error' %> — TrancheReady</title>
+  <link rel="stylesheet" href="/site/assets/style.css" />
 </head>
 <body>
-  <div class="wrap"><div class="card">
-    <h1><%= title %></h1>
-    <p class="muted"><%= message %></p>
-    <p><a href="/">Back to home</a></p>
-  </div></div>
+  <header class="nav glass">
+    <a class="brand" href="/"><span class="logo-dot"></span>TrancheReady</a>
+    <nav>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/faq">FAQ</a>
+      <button id="themeToggle" class="pill">Toggle</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero hero--short">
+      <h1><%= title || 'Something went wrong' %></h1>
+      <p class="lead"><%= message || 'Please try again.' %></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">TrancheReady</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/site/assets/site.js" defer></script>
 </body>
 </html>
