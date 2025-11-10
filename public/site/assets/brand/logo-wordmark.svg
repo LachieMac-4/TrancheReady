@@ -1,0 +1,17 @@
+<svg width="520" height="80" viewBox="0 0 520 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TrancheReady">
+  <defs>
+    <linearGradient id="tr-g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2455FF"/>
+      <stop offset="1" stop-color="#7AA3FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Tight, heavy wordmark: 'Tranche' in calm ink; 'Ready' in brand gradient -->
+  <text x="0" y="54"
+        font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+        font-size="48" font-weight="800" letter-spacing="-0.5"
+        fill="#E8EFFF">Tranche</text>
+  <text x="210" y="54"
+        font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+        font-size="48" font-weight="800" letter-spacing="-0.5"
+        fill="url(#tr-g)">Ready</text>
+</svg>
