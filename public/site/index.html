@@ -9,6 +9,7 @@
   <meta name="color-scheme" content="dark light" />
 </head>
 <body>
+  <!-- Sticky glass nav -->
   <header class="nav glass">
     <a class="brand" href="/"><span class="logo-dot"></span>TrancheReady</a>
     <nav>
@@ -16,88 +17,136 @@
       <a href="/features">Features</a>
       <a href="/pricing">Pricing</a>
       <a href="/faq">FAQ</a>
-      <button id="themeToggle" class="pill">Toggle</button>
+      <button id="themeToggle" class="pill">Theme</button>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
-        <h1>CSV in → signed ZIP out</h1>
-        <p class="lead">Explainable risk scores, monitoring cases, and a verifiable evidence pack — without giving us any credentials.</p>
-        <div style="margin-top:18px">
-          <a class="btn btn-primary" href="/pricing">Get started</a>
-          <a class="btn" href="#how">How it works</a>
+    <!-- HERO -->
+    <section class="hero hero--landing">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Get audit-ready AML/CTF evidence in minutes</h1>
+          <p class="lead">
+            Explainable risk scores, monitoring cases, and a verifiable evidence pack —
+            without any integrations or credentials.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="/pricing">Get started</a>
+            <a class="btn" href="#how">How it works</a>
+          </div>
+
+          <!-- Trust chips -->
+          <div class="trust-chips">
+            <span class="chip">Legal</span>
+            <span class="chip">Accounting</span>
+            <span class="chip">Real Estate</span>
+            <span class="chip">Advisory</span>
+          </div>
+        </div>
+
+        <!-- Subtle abstract wave art (no CSV boxes) -->
+        <div class="hero-art">
+          <svg viewBox="0 0 1200 600" width="100%" height="100%" aria-hidden="true" class="wave-svg">
+            <defs>
+              <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#2455FF"/>
+                <stop offset="1" stop-color="#7AA3FF"/>
+              </linearGradient>
+              <filter id="blur"><feGaussianBlur stdDeviation="30"/></filter>
+            </defs>
+            <path d="M0,380 C200,320 360,460 560,400 C780,330 940,480 1200,420 L1200,600 L0,600 Z"
+                  fill="url(#grad)" opacity="0.25" filter="url(#blur)"/>
+            <path d="M0,420 C180,370 360,510 540,460 C760,390 920,530 1200,470 L1200,600 L0,600 Z"
+                  fill="url(#grad)" opacity="0.16"/>
+          </svg>
         </div>
       </div>
-      <div class="hero-art">
-        <!-- simple SVG wave/diagram -->
-        <svg viewBox="0 0 1200 260" width="100%" height="220" aria-hidden="true">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0" stop-color="#2455FF"/>
-              <stop offset="1" stop-color="#7AA3FF"/>
-            </linearGradient>
-          </defs>
-          <path d="M0,160 C160,120 260,190 420,150 C600,100 720,220 900,140 C1040,80 1120,120 1200,100 L1200,260 L0,260 Z" fill="url(#g)" fill-opacity=".18"/>
-          <rect x="140" y="40" rx="12" ry="12" width="200" height="120" fill="#10152a" stroke="#2a3a6b" />
-          <text x="240" y="105" text-anchor="middle" fill="#b6c8ff" font-size="14">Clients.csv</text>
-          <rect x="420" y="40" rx="12" ry="12" width="220" height="120" fill="#10152a" stroke="#2a3a6b" />
-          <text x="530" y="105" text-anchor="middle" fill="#b6c8ff" font-size="14">Transactions.csv</text>
-          <rect x="760" y="40" rx="12" ry="12" width="280" height="120" fill="#0B1733" stroke="#2f4277"/>
-          <text x="900" y="95" text-anchor="middle" fill="#e8efff" font-size="14">ZIP: clients.json, transactions.json,<tspan x="900" dy="18">cases.json, program.html, manifest.json</tspan></text>
-        </svg>
+    </section>
+
+    <!-- Social proof / trust row -->
+    <section class="container trust-row">
+      <div class="muted smallcaps">Built for Tranche-2 programs</div>
+      <div class="trust-logos">
+        <div class="logo-placeholder" aria-hidden="true"></div>
+        <div class="logo-placeholder" aria-hidden="true"></div>
+        <div class="logo-placeholder" aria-hidden="true"></div>
+        <div class="logo-placeholder" aria-hidden="true"></div>
       </div>
     </section>
 
-    <section class="container" style="margin-top:18px">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-        <span class="pill">Legal</span>
-        <span class="pill">Accounting</span>
-        <span class="pill">Real Estate</span>
-        <span class="pill">Advisory</span>
-      </div>
-    </section>
-
-    <section class="container" style="margin-top:24px">
-      <div class="pricing-grid" style="grid-template-columns: repeat(4, 1fr)">
-        <div class="card">
+    <!-- Feature grid -->
+    <section class="container" style="margin-top:16px">
+      <div class="feature-grid">
+        <article class="card feature">
           <h3>Explainable risk</h3>
           <p class="muted">High / Medium / Low with line-item reasons. Rules are tuned for your sector.</p>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card feature">
           <h3>Monitoring cases</h3>
           <p class="muted">Structuring, high-risk corridors, and large domestic transfers flagged.</p>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card feature">
           <h3>Evidence pack</h3>
           <p class="muted">ZIP contains JSON, printable HTML, and a signed SHA-256 manifest.</p>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card feature">
           <h3>Verify link</h3>
           <p class="muted">Auditors can confirm file integrity and download — no logins required.</p>
-        </div>
+        </article>
       </div>
     </section>
 
+    <!-- How it works -->
     <section id="how" class="container" style="margin:28px auto 40px">
-      <div class="card">
-        <h3>How it works</h3>
-        <ol class="list">
-          <li>Export Clients &amp; Transactions from your system as CSV</li>
-          <li>Upload in the app — we normalize headers, validate, and score</li>
-          <li>Download your signed evidence pack, or share the verify link</li>
-        </ol>
-        <div style="margin-top:12px">
+      <div class="card how">
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="how-num">1</div>
+            <div>
+              <h4>Export</h4>
+              <p class="muted">Download Clients & Transactions as CSV from your system.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-num">2</div>
+            <div>
+              <h4>Generate</h4>
+              <p class="muted">Upload in the app. We normalise headers, validate, and score.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-num">3</div>
+            <div>
+              <h4>Deliver</h4>
+              <p class="muted">Download your signed pack or share a read-only verify link.</p>
+            </div>
+          </div>
+        </div>
+        <div class="how-cta">
           <a class="btn btn-primary" href="/pricing">See pricing</a>
+          <a class="btn" href="/features">View features</a>
         </div>
       </div>
     </section>
 
-    <section class="container security-row" style="margin-top:6px">
-      <div class="card mini"><h4>No credentials</h4><p>CSV exports only. No API keys, no logins.</p></div>
-      <div class="card mini"><h4>Integrity checks</h4><p>SHA-256 manifest + verify page for auditors.</p></div>
-      <div class="card mini"><h4>Data ownership</h4><p>Files are processed in memory and not persisted.</p></div>
+    <!-- Testimonial -->
+    <section class="container">
+      <blockquote class="card quote">
+        <p>“It took our team hours to prepare evidence before. Now it’s minutes — with better explanations.”</p>
+        <footer>— Principal, AU legal firm</footer>
+      </blockquote>
+    </section>
+
+    <!-- CTA band -->
+    <section class="cta-band">
+      <div class="container cta-band-inner">
+        <div>
+          <h3 class="cta-title">Ready to generate your first evidence pack?</h3>
+          <p class="muted">No credentials. No integration risk. Just CSV in → ZIP out.</p>
+        </div>
+        <a class="btn btn-primary" href="/pricing">Get started</a>
+      </div>
     </section>
   </main>
 
