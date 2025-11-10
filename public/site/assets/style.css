@@ -1,4 +1,7 @@
-/* Design tokens */
+/* public/site/assets/style.css */
+/* ──────────────────────────────────────────────────────────────────────────
+   Design tokens
+   ────────────────────────────────────────────────────────────────────────── */
 :root {
   --brand-1: #2455ff;
   --brand-2: #7aa3ff;
@@ -30,7 +33,9 @@
   --shadow-soft: 0 10px 26px rgba(12,24,64,0.12);
 }
 
-/* Base */
+/* ──────────────────────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────────────────────── */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
@@ -46,29 +51,40 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* Global text colors to avoid black-on-dark */
 h1, h2, h3, h4, h5, h6 { color: var(--ink-strong); margin: 0 0 8px; }
 p, li, summary, details, small, time, blockquote, figcaption { color: var(--ink); }
 .muted { color: var(--muted); }
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .container { max-width: 1120px; padding: 0 20px; margin: 0 auto; }
+.smallcaps { letter-spacing: .08em; text-transform: uppercase; font-size: 12px; color: var(--muted); }
 
-/* Nav */
+/* ──────────────────────────────────────────────────────────────────────────
+   Nav (with larger brand logo)
+   ────────────────────────────────────────────────────────────────────────── */
 .nav {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px; backdrop-filter: blur(10px);
+  padding: 16px 20px; /* ↑ bigger to fit taller logo */
+  backdrop-filter: blur(10px);
   background: rgba(16,21,42,0.55);
   border-bottom: 1px solid rgba(230,234,242,0.12);
 }
-.nav .brand { display: flex; align-items: center; font-weight: 600; color: #e8efff; }
-.logo-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); }
+.nav .brand { display: flex; align-items: center; gap: 10px; }
 .nav nav { display: flex; gap: 14px; align-items: center; }
 .nav a { color: #d9e6ff; opacity: .9; }
 .nav a.active { color: #fff; opacity: 1; }
-.pill {
+
+/* BIGGER, CRISP SHIELD LOCKUP */
+.brand-logo { display:block; height: 48px; width: auto; }  /* main size */
+@media (min-width: 1200px) { .brand-logo { height: 54px; } } /* desktop bump */
+@media (max-width: 520px)  { .brand-logo { height: 40px; } } /* mobile fit */
+
+/* (legacy dot kept in case some pages still reference it) */
+.logo-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); }
+
+/* Pills / Buttons */
+.pill, .chip, .btn {
   border: 1px solid rgba(230,234,242,0.25);
   background: transparent;
   color: var(--ink);
@@ -76,8 +92,22 @@ a:hover { text-decoration: underline; }
   padding: 6px 10px;
   cursor: pointer;
 }
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: 120ms ease-in-out;
+}
+.btn:hover { transform: translateY(-1px); border-color: rgba(230,234,242,0.45); text-decoration: none; }
+.btn-primary {
+  border: 0;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  color: #ffffff;
+}
 
-/* Hero */
+/* ──────────────────────────────────────────────────────────────────────────
+   Hero
+   ────────────────────────────────────────────────────────────────────────── */
 .hero { position: relative; }
 .hero--landing { padding: 84px 0 24px; }
 .hero .hero-inner {
@@ -86,24 +116,20 @@ a:hover { text-decoration: underline; }
 .hero-copy h1 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; }
 .lead { margin: 0; font-size: 18px; color: var(--muted); }
 .hero-cta { display: flex; gap: 10px; margin-top: 18px; }
-.trust-chips { display:flex; gap:8px; margin-top:18px; flex-wrap: wrap; padding-left: 0; list-style: none; }
-.chip {
-  display:inline-block; border:1px solid rgba(230,234,242,0.25);
-  color:#dfe6ff; background: transparent; border-radius: 999px; padding: 6px 10px;
-}
+.trust-chips { display:flex; gap:8px; margin-top:18px; flex-wrap: wrap; padding-left:0; list-style:none; }
+.chip { color:#dfe6ff; }
 .hero-art { min-height: 260px; display:flex; align-items:center; justify-content:center; }
 .wave-svg { filter: drop-shadow(0 30px 70px rgba(36,85,255,.18)); }
 
 /* Stat strip */
-.stat-strip {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  margin-top: 18px;
-}
+.stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
 .stat { background: var(--panel); border:1px solid rgba(230,234,242,0.12); border-radius: var(--radius); padding: 12px 16px; box-shadow: var(--shadow-soft); }
 .stat-k { color: var(--ink-strong); font-weight: 600; }
 .stat-v { font-size: 13px; }
 
-/* Trust logos */
+/* ──────────────────────────────────────────────────────────────────────────
+   Trust logos
+   ────────────────────────────────────────────────────────────────────────── */
 .trust-row { margin: 18px auto 8px; }
 .trust-logos { display:flex; gap:18px; align-items:center; margin-top: 10px; flex-wrap: wrap; }
 .logo-placeholder {
@@ -113,7 +139,9 @@ a:hover { text-decoration: underline; }
   box-shadow: var(--shadow-soft);
 }
 
-/* Cards & UI */
+/* ──────────────────────────────────────────────────────────────────────────
+   Cards & UI
+   ────────────────────────────────────────────────────────────────────────── */
 .card {
   background: var(--panel);
   border: 1px solid rgba(230,234,242,0.12);
@@ -124,24 +152,8 @@ a:hover { text-decoration: underline; }
 }
 .card h3, .card h4 { color: var(--ink-strong); }
 
-.btn {
-  display: inline-block;
-  border: 1px solid rgba(230,234,242,0.18);
-  color: #dfe9ff; background: transparent;
-  border-radius: 12px; padding: 10px 14px; cursor: pointer;
-  transition: 120ms ease-in-out;
-}
-.btn:hover { transform: translateY(-1px); border-color: rgba(230,234,242,0.45); text-decoration: none; }
-.btn-primary {
-  border: 0;
-  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-  color: #ffffff;
-}
-
 /* Feature grid */
-.feature-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-}
+.feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .feature .icon {
   width: 28px; height: 28px; border-radius: 8px;
   display:inline-flex; align-items:center; justify-content:center;
@@ -150,9 +162,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* Compliance badges */
-.badges {
-  display:flex; gap:8px; flex-wrap:wrap; margin: 14px 0 8px;
-}
+.badges { display:flex; gap:8px; flex-wrap:wrap; margin: 14px 0 8px; }
 .badge { color:#dfe6ff; }
 
 /* How it works */
@@ -180,9 +190,7 @@ a:hover { text-decoration: underline; }
   border-top: 1px solid rgba(230,234,242,0.12);
   border-bottom: 1px solid rgba(230,234,242,0.12);
 }
-.cta-band-inner {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0;
-}
+.cta-band-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
 .cta-title { color: var(--ink-strong); margin: 0 0 4px; }
 
 /* Footer */
@@ -203,19 +211,21 @@ a:hover { text-decoration: underline; }
 /* Glass helper */
 .glass { background: rgba(16,21,42,0.55); }
 
-/* Details/summary (FAQ) — ensure readable colors */
+/* Details/summary (FAQ) */
 details { background: var(--panel); border: 1px solid rgba(230,234,242,0.12); border-radius: var(--radius); padding: 12px 14px; }
 details + details { margin-top: 10px; }
 summary { cursor: pointer; color: var(--ink-strong); }
 
-/* Forms (buttons/inputs) — ensure contrast */
+/* Forms */
 input, select, textarea {
   color: var(--ink); background: var(--panel); border: 1px solid rgba(230,234,242,0.22);
   border-radius: 10px; padding: 8px 10px;
 }
 input::placeholder, textarea::placeholder { color: var(--muted); }
 
-/* Responsive */
+/* ──────────────────────────────────────────────────────────────────────────
+   Responsive
+   ────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 1060px) {
   .hero .hero-inner { grid-template-columns: 1fr; }
   .hero-art { min-height: 200px; order: 2; }
