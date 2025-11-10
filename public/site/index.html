@@ -3,25 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TrancheReady — CSV in → Signed ZIP out</title>
-  <meta name="description" content="Explainable client risk, monitoring cases, and audit-ready evidence without integrations. CSV in → signed ZIP out." />
-  <link rel="stylesheet" href="/site/assets/style.css" />
+  <title>TrancheReady — AML/CTF Evidence in Minutes</title>
+  <meta name="description" content="Explainable client risk, monitoring cases, and a verifiable evidence pack — CSV in → signed ZIP out. No credentials or integrations." />
   <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0A1630" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="TrancheReady — AML/CTF Evidence in Minutes">
+  <meta property="og:description" content="Explainable risk, monitoring cases, and a verifiable evidence pack — no integrations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://trancheready.com/">
+  <link rel="stylesheet" href="/site/assets/style.css" />
 </head>
 <body>
   <!-- Sticky glass nav -->
-  <header class="nav glass">
-    <a class="brand" href="/"><span class="logo-dot"></span>TrancheReady</a>
+  <header class="nav glass" role="navigation" aria-label="Primary">
+    <a class="brand" href="/"><span class="logo-dot" aria-hidden="true"></span>TrancheReady</a>
     <nav>
       <a class="active" href="/">Home</a>
       <a href="/features">Features</a>
       <a href="/pricing">Pricing</a>
       <a href="/faq">FAQ</a>
-      <button id="themeToggle" class="pill">Theme</button>
+      <button id="themeToggle" class="pill" aria-label="Toggle theme">Theme</button>
     </nav>
   </header>
 
-  <main>
+  <main id="top">
     <!-- HERO -->
     <section class="hero hero--landing">
       <div class="container hero-inner">
@@ -29,25 +35,25 @@
           <h1>Get audit-ready AML/CTF evidence in minutes</h1>
           <p class="lead">
             Explainable risk scores, monitoring cases, and a verifiable evidence pack —
-            without any integrations or credentials.
+            without credentials or integrations.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="/pricing">Get started</a>
+            <a class="btn btn-primary" href="/pricing" aria-label="View pricing and start">Get started</a>
             <a class="btn" href="#how">How it works</a>
           </div>
 
           <!-- Trust chips -->
-          <div class="trust-chips">
-            <span class="chip">Legal</span>
-            <span class="chip">Accounting</span>
-            <span class="chip">Real Estate</span>
-            <span class="chip">Advisory</span>
-          </div>
+          <ul class="trust-chips" aria-label="Sectors">
+            <li class="chip">Legal</li>
+            <li class="chip">Accounting</li>
+            <li class="chip">Real Estate</li>
+            <li class="chip">Advisory</li>
+          </ul>
         </div>
 
-        <!-- Subtle abstract wave art (no CSV boxes) -->
-        <div class="hero-art">
-          <svg viewBox="0 0 1200 600" width="100%" height="100%" aria-hidden="true" class="wave-svg">
+        <!-- Abstract wave art (no CSV boxes) -->
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 1200 600" width="100%" height="100%" class="wave-svg">
             <defs>
               <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0" stop-color="#2455FF"/>
@@ -62,16 +68,36 @@
           </svg>
         </div>
       </div>
+
+      <!-- Stat strip -->
+      <div class="container stat-strip" role="group" aria-label="Key benefits">
+        <div class="stat">
+          <div class="stat-k">No credentials</div>
+          <div class="stat-v muted">CSV in → ZIP out</div>
+        </div>
+        <div class="stat">
+          <div class="stat-k">Explainable</div>
+          <div class="stat-v muted">Line-item reasons</div>
+        </div>
+        <div class="stat">
+          <div class="stat-k">Audit-ready</div>
+          <div class="stat-v muted">SHA-256 manifest</div>
+        </div>
+        <div class="stat">
+          <div class="stat-k">Verify link</div>
+          <div class="stat-v muted">Read-only</div>
+        </div>
+      </div>
     </section>
 
     <!-- Social proof / trust row -->
-    <section class="container trust-row">
+    <section class="container trust-row" aria-label="Trusted by">
       <div class="muted smallcaps">Built for Tranche-2 programs</div>
       <div class="trust-logos">
-        <div class="logo-placeholder" aria-hidden="true"></div>
-        <div class="logo-placeholder" aria-hidden="true"></div>
-        <div class="logo-placeholder" aria-hidden="true"></div>
-        <div class="logo-placeholder" aria-hidden="true"></div>
+        <div class="logo-placeholder" title="Your logo here"></div>
+        <div class="logo-placeholder" title="Your logo here"></div>
+        <div class="logo-placeholder" title="Your logo here"></div>
+        <div class="logo-placeholder" title="Your logo here"></div>
       </div>
     </section>
 
@@ -79,22 +105,36 @@
     <section class="container" style="margin-top:16px">
       <div class="feature-grid">
         <article class="card feature">
+          <div class="icon" aria-hidden="true">✓</div>
           <h3>Explainable risk</h3>
-          <p class="muted">High / Medium / Low with line-item reasons. Rules are tuned for your sector.</p>
+          <p class="muted">High / Medium / Low with clear, line-item reasons. Rules tuned per sector.</p>
         </article>
         <article class="card feature">
+          <div class="icon" aria-hidden="true">⚑</div>
           <h3>Monitoring cases</h3>
           <p class="muted">Structuring, high-risk corridors, and large domestic transfers flagged.</p>
         </article>
         <article class="card feature">
+          <div class="icon" aria-hidden="true">⬚</div>
           <h3>Evidence pack</h3>
-          <p class="muted">ZIP contains JSON, printable HTML, and a signed SHA-256 manifest.</p>
+          <p class="muted">ZIP includes JSON, printable HTML, and a signed SHA-256 manifest.</p>
         </article>
         <article class="card feature">
+          <div class="icon" aria-hidden="true">🔗</div>
           <h3>Verify link</h3>
           <p class="muted">Auditors can confirm file integrity and download — no logins required.</p>
         </article>
       </div>
+    </section>
+
+    <!-- Compliance badges -->
+    <section class="container badges">
+      <div class="badge pill">HTTPS + HSTS</div>
+      <div class="badge pill">Strict CSP</div>
+      <div class="badge pill">Rate-limited</div>
+      <div class="badge pill">Memory uploads</div>
+      <div class="badge pill">No credentials</div>
+      <div class="badge pill">Evidence manifest</div>
     </section>
 
     <!-- How it works -->
@@ -102,21 +142,21 @@
       <div class="card how">
         <div class="how-steps">
           <div class="how-step">
-            <div class="how-num">1</div>
+            <div class="how-num" aria-hidden="true">1</div>
             <div>
               <h4>Export</h4>
               <p class="muted">Download Clients & Transactions as CSV from your system.</p>
             </div>
           </div>
           <div class="how-step">
-            <div class="how-num">2</div>
+            <div class="how-num" aria-hidden="true">2</div>
             <div>
               <h4>Generate</h4>
               <p class="muted">Upload in the app. We normalise headers, validate, and score.</p>
             </div>
           </div>
           <div class="how-step">
-            <div class="how-num">3</div>
+            <div class="how-num" aria-hidden="true">3</div>
             <div>
               <h4>Deliver</h4>
               <p class="muted">Download your signed pack or share a read-only verify link.</p>
@@ -133,13 +173,13 @@
     <!-- Testimonial -->
     <section class="container">
       <blockquote class="card quote">
-        <p>“It took our team hours to prepare evidence before. Now it’s minutes — with better explanations.”</p>
+        <p>“It used to take us days to compile evidence. Now it’s minutes — and auditors love the verify link.”</p>
         <footer>— Principal, AU legal firm</footer>
       </blockquote>
     </section>
 
     <!-- CTA band -->
-    <section class="cta-band">
+    <section class="cta-band" aria-label="Final call to action">
       <div class="container cta-band-inner">
         <div>
           <h3 class="cta-title">Ready to generate your first evidence pack?</h3>
@@ -150,10 +190,10 @@
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
       <div class="brand">TrancheReady</div>
-      <nav>
+      <nav aria-label="Footer">
         <a href="/features">Features</a>
         <a href="/pricing">Pricing</a>
         <a href="/faq">FAQ</a>
@@ -162,6 +202,9 @@
       </nav>
     </div>
   </footer>
+
+  <!-- Back to top pill -->
+  <a href="#top" class="to-top" aria-label="Back to top">↑</a>
 
   <script src="/site/assets/site.js" defer></script>
 </body>
