@@ -1,26 +1,66 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FAQ • TrancheReady</title>
-<link rel="icon" href="/public/favicon.ico">
-<style>
-  :root{--ink:#E6EDFF;--muted:#95A7D0;--bg:#0A1630;--panel:#0B1733;--line:#213058;--radius:14px}
-  body{margin:0;background:#0A1630;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui}
-  .wrap{max-width:900px;margin:32px auto;padding:0 16px}
-  .card{background:#0B1733;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 44px rgba(0,12,45,.35);padding:18px;margin-bottom:12px}
-  .muted{color:var(--muted)}
-  details{border:1px solid var(--line);border-radius:12px;padding:12px;background:#0B1733;margin:10px 0}
-  summary{cursor:pointer;font-weight:700}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrancheReady — FAQ</title>
+  <link rel="stylesheet" href="/site/assets/style.css" />
 </head>
 <body>
-<div class="wrap">
-  <h1>FAQ</h1>
-  <details open><summary>Do you need system credentials?</summary><div class="muted">No. Upload CSVs — we do not take API access or logins.</div></details>
-  <details><summary>What’s inside the evidence ZIP?</summary><div class="muted">clients.json, transactions.json, cases.json, program.html, and a signed manifest.json with SHA-256 hashes.</div></details>
-  <details><summary>What rules do you apply?</summary><div class="muted">Explainable, rules-first: PEP/sanctions, stale KYC, residency, service types; behavioral: structuring, high-risk corridors, large domestic transfers.</div></details>
-  <details><summary>How long are verify links valid?</summary><div class="muted">By default, <code>VERIFY_TTL_MIN</code> minutes (configurable via environment variable).</div></details>
-</div>
+  <header class="nav glass">
+    <a class="brand" href="/"><span class="logo-dot"></span>TrancheReady</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a class="active" href="/faq">FAQ</a>
+      <button id="themeToggle" class="pill">Toggle</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero hero--short">
+      <h1>FAQ</h1>
+      <p class="lead">Short answers for compliance leads and auditors.</p>
+    </section>
+
+    <section class="card" style="margin-bottom:18px">
+      <details open>
+        <summary><strong>Do you need access to our core system?</strong></summary>
+        <p class="muted">No. We only accept CSV exports — no credentials, no API tokens, no integration risk.</p>
+      </details>
+      <details>
+        <summary><strong>How is risk scored?</strong></summary>
+        <p class="muted">Rules-first engine. We normalize headers and map synonyms so data is read correctly, then score profile and behavioural signals. Scores band to High ≥30, Medium ≥15, else Low.</p>
+      </details>
+      <details>
+        <summary><strong>What’s in the evidence pack?</strong></summary>
+        <p class="muted">clients.json, transactions.json, cases.json, program.html, and manifest.json with SHA-256 hashes. The verify page allows read-only validation and download.</p>
+      </details>
+      <details>
+        <summary><strong>Do you store our data?</strong></summary>
+        <p class="muted">Uploads are processed in memory for the session and not written to disk. Verify links expire automatically.</p>
+      </details>
+      <details>
+        <summary><strong>Can we customise rules?</strong></summary>
+        <p class="muted">Yes. For Enterprise we tune rules per sector and can add corridors or thresholds to match your program.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">TrancheReady</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+        <a href="/site/privacy.html">Privacy</a>
+        <a href="/site/terms.html">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/site/assets/site.js" defer></script>
 </body>
 </html>
