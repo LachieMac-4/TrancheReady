@@ -75,10 +75,12 @@ a:hover { text-decoration: underline; }
 .nav a { color: #d9e6ff; opacity: .9; }
 .nav a.active { color: #fff; opacity: 1; }
 
-/* BIGGER, CRISP SHIELD LOCKUP */
-.brand-logo { display:block; height: 48px; width: auto; }  /* main size */
-@media (min-width: 1200px) { .brand-logo { height: 54px; } } /* desktop bump */
-@media (max-width: 520px)  { .brand-logo { height: 40px; } } /* mobile fit */
+/* Brand sizing for shield lockup */
+.brand-logo { display:block; height:48px; width:auto; }
+.nav { padding:16px 20px; }
+@media (min-width:1200px){ .brand-logo{ height:54px; } }
+@media (max-width:520px){ .brand-logo{ height:40px; } }
+
 
 /* (legacy dot kept in case some pages still reference it) */
 .logo-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); }
