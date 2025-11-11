@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Account — TrancheReady</title>
+  <link rel="stylesheet" href="/site/assets/style.css" />
+</head>
+<body>
+  <header class="nav glass">
+    <a class="brand" href="/">
+      <img src="/site/assets/brand/shield-lockup.svg" alt="TrancheReady" class="brand-logo" />
+    </a>
+    <nav>
+      <a href="/app">App</a>
+      <a href="/pricing">Pricing</a>
+      <button id="portalBtn" class="pill">Manage billing</button>
+      <form action="/logout" method="post" style="display:inline"><button class="pill" style="margin-left:8px">Log out</button></form>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero hero--short">
+      <h1>Account</h1>
+      <p class="lead">Edit your profile. Your subscription is active.</p>
+    </section>
+
+    <section class="card" style="max-width:720px">
+      <form method="post" action="/account">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label> Name
+            <input name="name" value="<%= (user && user.name) || '' %>" placeholder="Jane Citizen" />
+          </label>
+          <label> Company
+            <input name="company" value="<%= (user && user.company) || '' %>" placeholder="ACME Pty Ltd" />
+          </label>
+          <label> ABN
+            <input name="abn" value="<%= (user && user.abn) || '' %>" placeholder="00 000 000 000" />
+          </label>
+          <label> Email
+            <input value="<%= (user && user.email) || '' %>" disabled />
+          </label>
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn btn-primary" type="submit">Save</button>
+          <button id="portalBtn2" class="btn" type="button">Manage billing</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">TrancheReady</div>
+      <nav>
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    async function openPortal(){
+      const res = await fetch('/billing/portal', { method:'POST' });
+      const data = await res.json();
+      if(!res.ok){ alert(data.error || 'Portal error'); return; }
+      window.location = data.url;
+    }
+    document.getElementById('portalBtn')?.addEventListener('click', openPortal);
+    document.getElementById('portalBtn2')?.addEventListener('click', openPortal);
+  </script>
+</body>
+</html>
