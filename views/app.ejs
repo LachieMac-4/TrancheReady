@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>App — TrancheReady</title>
+  <link rel="stylesheet" href="/site/assets/style.css" />
+  <style>
+    .app-wrap { max-width: 960px; margin: 0 auto; padding: 18px 20px 40px; }
+    .uploader { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .uploader label { display:block; }
+    .preview { margin-top:16px; display:none; }
+    .preview.show { display:block; }
+    .kpis { display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0; }
+    .kpi { background: var(--panel); border: 1px solid rgba(230,234,242,0.12); border-radius: var(--radius); padding: 12px; text-align:center; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .hint { color: var(--muted); font-size: 13px; }
+    .banner { margin-bottom: 12px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  </style>
+</head>
+<body>
+  <header class="nav glass">
+    <a class="brand" href="/">
+      <img src="/site/assets/brand/shield-lockup.svg" alt="TrancheReady" class="brand-logo" />
+    </a>
+    <nav>
+      <a href="/pricing">Pricing</a>
+      <a href="/account">Account</a>
+      <form action="/logout" method="post" style="display:inline"><button class="pill" style="margin-left:8px">Log out</button></form>
+    </nav>
+  </header>
+
+  <main class="app-wrap">
+    <section class="banner">
+      <div>
+        <h1>CSV in → signed ZIP out</h1>
+        <p class="muted">Upload <b>Clients.csv</b> and <b>Transactions.csv</b>, or try a demo run.</p>
+      </div>
+      <div>
+        <button id="sampleBtn" class="btn">Try sample data</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <form id="uploadForm" class="uploader">
+        <label>
+          Clients.csv
+          <input id="clients" name="clients" type="file" accept=".csv,text/csv" required />
+        </label>
+        <label>
+          Transactions.csv
+          <input id="transactions" name="transactions" type="file" accept=".csv,text/csv" required />
+        </label>
+        <div style="grid-column:1/-1; display:flex; gap:10px; align-items:center;">
+          <button class="btn btn-primary" type="submit">Generate evidence</button>
+          <span id="status" class="hint"></span>
+        </div>
+      </form>
+    </section>
+
+    <section id="preview" class="preview">
+      <div class="card">
+        <h3>Preview</h3>
+        <p class="hint">Quick summary before download.</p>
+
+        <div class="kpis">
+          <div class="kpi"><div class="smallcaps">Total</div><div id="kpiTotal" style="font-weight:600"></div></div>
+          <div class="kpi"><div class="smallcaps">High</div><div id="kpiHigh" style="font-weight:600"></div></div>
+          <div class="kpi"><div class="smallcaps">Medium</div><div id="kpiMed" style="font-weight:600"></div></div>
+          <div class="kpi"><div class="smallcaps">Low</div><div id="kpiLow" style="font-weight:600"></div></div>
+        </div>
+
+        <h4 style="margin-top:8px">Top clients</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Client</th><th>Band</th><th>Score</th><th>Reasons</th></tr></thead>
+            <tbody id="topRows"></tbody>
+          </table>
+        </div>
+
+        <h4 style="margin-top:10px">Cases</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Client</th><th>Type</th><th>Severity</th></tr></thead>
+            <tbody id="caseRows"></tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <a id="downloadBtn" class="btn btn-primary" href="#" download>Download ZIP</a>
+          <a id="verifyBtn" class="btn" href="#" target="_blank" rel="noopener">Open verify link</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">TrancheReady</div>
+      <nav>
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const q = s => document.querySelector(s);
+
+    function renderPreview(data){
+      q('#kpiTotal').textContent = data.counts.total;
+      q('#kpiHigh').textContent  = data.counts.high;
+      q('#kpiMed').textContent   = data.counts.medium;
+      q('#kpiLow').textContent   = data.counts.low;
+
+      q('#topRows').innerHTML = (data.top||[]).map(t=>{
+        const reasons=(t.reasons||[]).slice(0,3).join(', ');
+        return `<tr><td>${t.client_id||''}</td><td>${t.band}</td><td>${t.score}</td><td>${reasons}</td></tr>`;
+      }).join('') || `<tr><td colspan="4" class="muted">No clients found</td></tr>`;
+
+      q('#caseRows').innerHTML = (data.cases||[]).map(c=>{
+        return `<tr><td>${c.client_id||''}</td><td>${c.type}</td><td>${c.severity}</td></tr>`;
+      }).join('') || `<tr><td colspan="3" class="muted">No cases detected</td></tr>`;
+
+      q('#downloadBtn').href = data.download_url;
+      q('#verifyBtn').href = data.verify_url;
+
+      q('#preview').classList.add('show');
+      q('#status').textContent = '';
+    }
+
+    q('#uploadForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      q('#status').textContent='Processing…';
+      const c=q('#clients').files[0], t=q('#transactions').files[0];
+      if(!c||!t){ q('#status').textContent='Select both CSVs.'; return; }
+      const fd=new FormData(); fd.append('clients',c); fd.append('transactions',t);
+      try{
+        const res=await fetch('/upload',{ method:'POST', body:fd });
+        const data=await res.json();
+        if(!res.ok) throw new Error(data.error||'Upload failed');
+        renderPreview(data);
+      }catch(err){ q('#status').textContent=err.message||'Error building pack'; }
+    });
+
+    q('#sampleBtn').addEventListener('click', async ()=>{
+      q('#status').textContent='Generating sample…';
+      try{
+        const res=await fetch('/api/sample-pack',{ method:'POST' });
+        const data=await res.json();
+        if(!res.ok) throw new Error(data.error||'Sample failed');
+        renderPreview(data);
+      }catch(err){ q('#status').textContent=err.message||'Error generating sample'; }
+    });
+  </script>
+</body>
+</html>
